@@ -1,0 +1,13 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1767761546
+icon.svg::CompressedTexture2D::7745204463027567017::1767746314::1767746321::1::::<><><>0<>0<>6c6596ab2c8f513e981289c220e7a8f8<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://nodes/::1767761600
+WebNode.tscn::PackedScene::4051309605131902676::1767761763::0::1::::<><><>0<>0<><>::uid://bjxftk4bwnb17::::res://scripts/core/web_node.gd
+::res://scenes/::1767761626
+main.tscn::PackedScene::5664328276734163828::1767761626::0::1::::<><><>0<>0<><>::uid://dwhtltods2p31::::res://scenes/main.gd
+main.gd::GDScript::8719041541722305126::1767761482::0::1::::<>Control<><>0<>0<><>::
+::res://scripts/::1767746386
+::res://scripts/components/::1767761134
+::res://scripts/core/::1767761461
+web_node.gd::GDScript::3065939049934970048::1767761151::0::1::::WebNode<>PanelContainer<><>0<>0<><>::
+::res://scripts/ui/::1767761594

@@ -1,0 +1,9 @@
+res://scenes/main.tscn
+res://scripts/core/web_node.gd
+res://scenes/main.gd
+res://nodes/WebNode.tscn
+res://scripts/inspector.gd
+res://html_exporter.gd
+res://scenes/scene_tree_manager.gd
+res://scripts/web_node.gd
+res://scenes/canvas.gd
