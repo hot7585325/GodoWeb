@@ -28,6 +28,7 @@ func _ready():
 	popup.add_item("Add Div (Container)", 0)
 	popup.add_item("Add Button", 1)
 	popup.add_item("Add Image", 2)
+	popup.add_item("Add Label (Text)", 3) # ID 設為 3
 	popup.id_pressed.connect(_on_popup_item_pressed)
 	add_child(popup)
 	

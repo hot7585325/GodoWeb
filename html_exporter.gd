@@ -51,30 +51,46 @@ static func export_project(root_node: Control, settings: Dictionary, save_path: 
 
 # 這個遞迴函數維持不變
 static func _generate_node_html(node: WebNode) -> String:
+	# 1. 處理內部內容 (文字 + 子節點)
 	var inner_content = ""
+	
+	# [新增] 檢查是否有文字內容
+	# 使用 get() 安全存取，因為不是每個節點都有這些屬性
+	if "text_content" in node:
+		inner_content += node.text_content
+	if "label_text" in node:
+		inner_content += node.label_text
+	
+	# [維持] 遞迴處理子節點 (例如 Div 裡面包 Button)
 	for child in node.get_children():
 		if child is WebNode:
 			inner_content += _generate_node_html(child)
 			
+	# 2. 處理 CSS 樣式 (維持不變，或加上你的 Margin/Padding 邏輯)
 	var style = "position: absolute; left: %dpx; top: %dpx; width: %dpx; height: %dpx;" % [
-		node.position.x, 
-		node.position.y, 
-		node.size.x, 
-		node.size.y
+		node.position.x, node.position.y, node.size.x, node.size.y
 	]
+	style += "background-color: #%s;" % node.self_modulate.to_html()
 	
-	# 加入背景色與旋轉角度(如果有)
-	var color = node.self_modulate.to_html()
-	style += "background-color: #%s;" % color
-	
-	# 這裡暫時移除 border 方便預覽，或者你可以保留
-	# style += "border: 1px solid #999;" 
+	# [新增] 處理 HTML 屬性 (例如 disabled)
+	var extra_attrs = ""
+	if "disabled" in node and node.disabled:
+		extra_attrs += " disabled"
 
-	var html = '<div id="%s" class="%s" style="%s">\n%s\n</div>\n' % [
+	# Box Model CSS (如果之前有加的話請保留)
+	if node.padding > 0: style += "padding: %dpx;" % node.padding
+	if node.border_width > 0: style += "border: %dpx solid #%s;" % [node.border_width, node.border_color.to_html()]
+	if node.corner_radius > 0: style += "border-radius: %dpx;" % node.corner_radius
+
+	# 3. 組合
+	var html = '<%s id="%s" class="%s" style="%s"%s>\n%s\n</%s>\n' % [
+		node.html_tag, # 自動變成 div, p, 或 button
 		node.html_id,
 		node.html_class,
 		style,
-		inner_content 
+		extra_attrs,   # 插入額外屬性
+		inner_content, # 插入文字 + 子節點
+		node.html_tag
 	]
 	
 	return html

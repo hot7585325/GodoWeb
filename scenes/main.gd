@@ -13,6 +13,9 @@ extends Control
 
 # 預載 WebNode 場景
 var web_node_scene = preload("res://nodes/WebNode.tscn")
+var web_label_scene = preload("res://nodes/WebLabel.tscn")
+var web_button_scene = preload("res://nodes/WebButton.tscn")
+
 
 # [新增] 專案全域設定 (對應 HTML Head 與 Body 樣式)
 var project_settings = {
@@ -43,18 +46,21 @@ func _on_request_add_node(type_id: int):
             new_node.html_tag = "div"
             new_node.html_class = "container"
             new_node.size = Vector2(200, 200) # 給一個初始大小
-        1: # Button
+            
+        1: # Button (假設 ID 是 1)
+            new_node = web_button_scene.instantiate()
             new_node.name = "Button"
-            new_node.html_tag = "button"
-            new_node.html_class = "btn"
-            new_node.size = Vector2(120, 50)
-            new_node.self_modulate = Color(0.3, 0.6, 1.0) # 預設藍色
+            new_node.size = Vector2(120, 40)
+    
         2: # Image
             new_node.name = "Image"
             new_node.html_tag = "img"
             new_node.size = Vector2(150, 150)
             new_node.self_modulate = Color(0.8, 0.8, 0.8) # 預設灰色
-
+        3: # Label
+            new_node = web_label_scene.instantiate() # 實例化新的 WebLabel
+            new_node.name = "Label"
+            new_node.size = Vector2(150, 50) # 給個適當的初始大小
     # [重要修正] 加到 World 而不是 Canvas
     world.add_child(new_node)
     

@@ -1,6 +1,8 @@
+Button
+Label
+HSeparator
 Control
 Panel
-Button
 PanelContainer
 VBoxContainer
 ScrollContainer
